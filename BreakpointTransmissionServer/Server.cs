@@ -21,17 +21,16 @@ namespace BreakpointTransmissionServer
             TcpListener serverSocket = new TcpListener(IPAddress.Any, Port);
             serverSocket.Start();
 
-            UIMessageBox.Show("服务器已启动，正在等待连接...");
-
+            UIMessageBox.Show("服务器已启动，正在等待连接...", "服务端提示");
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
-                UIMessageBox.Show("客户端已连接！");
+                UIMessageBox.Show("客户端已连接！","服务端提示");
                 isReceiving = true;
                 receivedFileSize = 0;
 
                 // 多线程处理接收文件
-                System.Threading.Thread thread = new System.Threading.Thread(() =>
+                Thread thread = new Thread(() =>
                 {
                     ReceiveFile(clientSocket);
                 });
@@ -48,7 +47,10 @@ namespace BreakpointTransmissionServer
                     byte[] receivedBuffer = new byte[1024];
                     int bytesRead;
 
-                    using (FileStream fileStream = new FileStream(SavePath, FileMode.Append))
+                    //追加文件流,服务器端保存的文件会越来越大
+                    //using (FileStream fileStream = new FileStream(SavePath, FileMode.Append))
+                    //创建或者覆盖
+                    using (FileStream fileStream = new FileStream(SavePath, FileMode.OpenOrCreate))
                     {
                         while (isReceiving && (bytesRead = networkStream.Read(receivedBuffer, 0, receivedBuffer.Length)) > 0)
                         {
@@ -59,7 +61,7 @@ namespace BreakpointTransmissionServer
                 }
             }
 
-            UIMessageBox.Show("文件已收到并保存");
+            UIMessageBox.Show("文件已收到并保存", "服务端提示");
         }
     }
 }

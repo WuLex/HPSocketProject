@@ -37,9 +37,8 @@ namespace BreakpointTransmissionServer
 
         private void uibtnStartServer_Click(object sender, EventArgs e)
         {
+            uibtnStartServer.Enabled = false;
             server.Start();
         }
-
-
     }
 }

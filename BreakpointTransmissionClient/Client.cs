@@ -15,8 +15,8 @@ namespace BreakpointTransmissionClient
 
         private const int Port = 8888;
         private const string ServerAddress = "127.0.0.1";
-        private const string FilePath = @"D:\DDDPath\File.bin"; // 要传输的文件路径
-
+        public  string FilePath = @"D:\DDDPath\File.bin"; // 要传输的文件路径
+      
         public void SendFile()
         {
             TcpClient clientSocket = new TcpClient();
