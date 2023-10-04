@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Layui Page";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+     <!-- 引入Layui CSS和JavaScript文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/layui/2.5.6/css/layui.min.css">
+    <script src="https://cdn.bootcdn.net/ajax/libs/layui/2.5.6/layui.min.js"></script>
+</head>
+<body>
+    <div class="layui-container">
+        <h1>欢迎</h1>
+        <button id="startServerBtn" class="layui-btn">启动HP-Socket服务</button>
+    </div>
+
+    <script>
+        layui.use(['layer', 'jquery'], function () {
+            var layer = layui.layer;
+            var $ = layui.jquery;
+
+            // 监听按钮点击事件
+            $('#startServerBtn').on('click', function () {
+                $.ajax({
+                    url: '/Home/StartServer', // 请求StartServer方法
+                    type: 'POST',
+                    success: function (response) {
+                        layer.alert(response); // 显示成功消息
+                    },
+                    error: function (error) {
+                        layer.alert('Error: ' + error.responseText); // 显示错误消息
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

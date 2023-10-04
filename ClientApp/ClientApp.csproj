@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="HPSocket.Net" Version="5.9.3.1" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.0.0-ci368" />
+  </ItemGroup>
+
+</Project>
