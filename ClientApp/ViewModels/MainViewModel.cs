@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Collections.Generic;
 using HPSocket.Tcp;
 using System.Windows;
+using System.Threading.Tasks;
 
 namespace ClientApp.ViewModels
 {
@@ -105,7 +106,7 @@ namespace ClientApp.ViewModels
             return HandleResult.Ok;
         }
 
-        private void Send()
+          private void Send()
         {
             // 添加发送消息到服务器的逻辑
             if (tcpClient == null || !tcpClient.IsConnected)
@@ -115,15 +116,22 @@ namespace ClientApp.ViewModels
             }
 
             string message = Message;
-            byte[] bytes = Encoding.UTF8.GetBytes(message);
-
-            if (tcpClient.Send(bytes, bytes.Length))
+            if (!string.IsNullOrEmpty(message))
             {
-                ChatLog.Add($"已发送消息：{message}");
+                byte[] bytes = Encoding.UTF8.GetBytes(message);
+
+                if (tcpClient.Send(bytes, bytes.Length))
+                {
+                    ChatLog.Add($"已发送消息：{message}");
+                }
+                else
+                {
+                    ChatLog.Add("无法发送消息到服务器。");
+                }
             }
             else
             {
-                ChatLog.Add("无法发送消息到服务器。");
+                MessageBox.Show("发送消息不能为空", "提示", MessageBoxButton.OK);
             }
         }
 
