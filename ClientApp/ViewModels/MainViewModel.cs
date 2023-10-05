@@ -25,8 +25,8 @@ namespace ClientApp.ViewModels
         /// </summary>
         private const int MaxPacketSize = 4096;
 
-        private string serverIP;
-        private int serverPort;
+        private string serverIP= "127.0.0.1";
+        private int serverPort=8888;
         private string message;
         private ObservableCollection<string> chatLog = new ObservableCollection<string>();
 

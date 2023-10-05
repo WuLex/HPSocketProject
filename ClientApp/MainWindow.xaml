@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClientApp"
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="WPF Chat App" Height="400" Width="600">
+        Title="WPF Chat App" Height="450" Width="600">
 
     <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
         <Grid.RowDefinitions>
@@ -40,9 +40,15 @@
                 <Button Content="Connect" Width="100" Command="{Binding ConnectCommand}" Margin="0,0,10,0"/>
                 <Button Content="Send" Width="100" Command="{Binding SendCommand}" Margin="0,0,0,0"/>
             </StackPanel>
-            <ScrollViewer>
-                <ListBox ItemsSource="{Binding ChatLog}" Margin="0,20,0,0" MinHeight="200"/>
-            </ScrollViewer>
+
+                <ListBox ItemsSource="{Binding ChatLog}" Margin="0,20,0,0" MinHeight="200" MaxHeight="250">
+                    <!--<ListBox.Resources>
+                        <Style TargetType="ScrollBar" BasedOn="{StaticResource CustomScrollBarStyle}">
+                            --><!-- 定义你的自定义ScrollBar样式 --><!--
+                        </Style>
+                    </ListBox.Resources>-->
+                    <!-- 添加ListBox的内容项 -->
+                </ListBox>
         </StackPanel>
     </Grid>
 </Window>
